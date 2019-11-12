@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    section {
+        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+    }
+
+    article {
+        justify-content: flex-start;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    strong {
+        color: #cc3333;
+    }
+</style>
+
+<body>
+    <section>
+        <article>
+            <h1>Regla de tres</h1>
+            <label for="">
+                Venta:
+                <input onchange="getIt()" id="sell" type="number">
+            </label>
+            <label for="">
+                Inversión Total:
+                <input onchange="getIt()" id="investment" type="number">
+            </label>
+            <label for="">
+                Inversión Personal:
+                <input onchange="getIt()" id="person" type="number">
+            </label>
+            <button>Calcular</button>
+        </article>
+
+
+        <article>
+            <p>Ganancia total: $ <strong id="profit"></strong></p>
+            <p>Porcentaje de inversión personal: <strong id="percentage"></strong> %</p>
+            <p>Cantidad De la ganancia: $ <strong id="personalProfit"></strong> </p>
+        </article>
+
+    </section>
+
+
+    <script>
+        let percentage = document.querySelector('#percentage')
+        let personalProfit = document.querySelector('#personalProfit')
+        let profit = document.querySelector('#profit')
+
+        let sell = document.querySelector('#sell')
+        let investment = document.querySelector('#investment')
+        let person = document.querySelector('#person')
+
+
+
+        function getIt() {
+            profit.innerText = + Number(sell.value) - Number(investment.value)
+            percentage.innerText = ((Number(person.value) * 100) / Number(investment.value)).toFixed(2)
+            personalProfit.innerText = (Number(profit.innerText) * Number(percentage.innerText) * .01).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+
+    </script>
+</body>
+
+</html>
